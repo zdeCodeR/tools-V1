@@ -4,11 +4,10 @@ const readline = require('readline')
 const fs = require('fs')
 const fetch = require('node-fetch')
 
-// Config
-const ownerNumber = '628xxxxxx' // Ganti dengan nomor owner
-const botName = 'MyBot' // Ganti dengan nama bot Anda
-const selfMode = true // true = hanya bot yang bisa menggunakan command
-const antiSpam = {} // Untuk menyimpan waktu terakhir command dari pengguna
+const ownerNumber = '628xxxxxx'
+const botName = 'MyBot' 
+const selfMode = true 
+const antiSpam = {} 
 
 async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState('./session')
@@ -19,7 +18,6 @@ async function startBot() {
         version
     })
 
-    // Variabel global
     const contacts = []
     let textpushkontak = ''
 
@@ -40,7 +38,6 @@ async function startBot() {
         }
     })
 
-    // Kalau belum login, minta pairing code
     if (!state.creds.registered) {
         const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
         rl.question('Masukkan nomor WhatsApp (contoh: 628xxx): ', async (number) => {
@@ -62,18 +59,15 @@ async function startBot() {
         const q = args.join(' ')
         const isBot = sender === sock.user.id
 
-        // Fungsi helper
         const isOwner = sender.includes(ownerNumber)
         const reply = async (message) => {
             await sock.sendMessage(from, { text: message })
         }
 
-        // Self Mode: Hanya bot yang bisa menggunakan command
         if (selfMode && !isBot && !isOwner) {
-            return // Tidak merespon sama sekali
+            return 
         }
 
-        // Anti Spam (3 detik cooldown per user)
         if (antiSpam[sender] && Date.now() - antiSpam[sender] < 3000) {
             return
         }
