@@ -10,6 +10,6 @@ pkg update && pkg upgrade
 pkg install git
 pkg install nodejs
 git clone https://github.com/zdeCodeR/tools-V1.git
-cd my-whatsapp-bot
+cd tools-V1
 npm install
 npm start
