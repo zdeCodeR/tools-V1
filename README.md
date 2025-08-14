@@ -1,4 +1,4 @@
-# tools-V1
+i# tools-V1
 
 cat > README.md << 'EOF'
 # WhatsApp Bot Base
@@ -31,5 +31,8 @@ cat > README.md << 'EOF'
 }
 EOF
 
-6. npm install
-7. npm start
+6. npm install 
+
+7. npm install node-fetch
+
+8. npm start
