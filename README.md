@@ -8,7 +8,7 @@ cat > README.md << 'EOF'
 ```bash
 pkg update && pkg upgrade
 pkg install nodejs git
-git clone https://github.com/zScoR/tools-V1.git
+git clone https://github.com/zdeCodeR/tools-V1.git
 cd my-whatsapp-bot
 npm install
 npm start
