@@ -7,6 +7,8 @@ const fetch = require('node-fetch')
 // Config
 const ownerNumber = '628xxxxxx' // Ganti dengan nomor owner
 const botName = 'MyBot' // Ganti dengan nama bot Anda
+const selfMode = true // true = hanya bot yang bisa menggunakan command
+const antiSpam = {} // Untuk menyimpan waktu terakhir command dari pengguna
 
 async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState('./session')
@@ -58,12 +60,24 @@ async function startBot() {
         const command = text.toLowerCase().split(' ')[0]
         const args = text.split(' ').slice(1)
         const q = args.join(' ')
+        const isBot = sender === sock.user.id
 
         // Fungsi helper
         const isOwner = sender.includes(ownerNumber)
         const reply = async (message) => {
             await sock.sendMessage(from, { text: message })
         }
+
+        // Self Mode: Hanya bot yang bisa menggunakan command
+        if (selfMode && !isBot && !isOwner) {
+            return // Tidak merespon sama sekali
+        }
+
+        // Anti Spam (3 detik cooldown per user)
+        if (antiSpam[sender] && Date.now() - antiSpam[sender] < 3000) {
+            return
+        }
+        antiSpam[sender] = Date.now()
 
         switch(command) {
             case 'ping':
@@ -254,7 +268,8 @@ async function startBot() {
                 break;
 
             default:
-                if (text) {
+                // Tidak merespon command tidak dikenal jika bukan bot/owner
+                if (text && (isBot || isOwner || !selfMode)) {
                     await reply('Command tidak dikenali. Ketik *menu* untuk melihat daftar command.')
                 }
         }
