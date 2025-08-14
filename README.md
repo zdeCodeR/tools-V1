@@ -12,7 +12,7 @@ cat > README.md << 'EOF'
 
 3. pkg install nodejs
 
-3. git clone                                                  https://github.com/zdeCodeR/tools-V1.git
+3. git clone https://github.com/zdeCodeR/tools-V1.git
 
 4. cd tools-V1
 
