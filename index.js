@@ -4,7 +4,7 @@ const readline = require('readline')
 const fs = require('fs')
 const fetch = require('node-fetch')
 
-const ownerNumber = '628xxxxxx'
+const ownerNumber = '6285893973177'
 const botName = 'MyBot' 
 const selfMode = true 
 const antiSpam = {} 
