@@ -6,10 +6,30 @@ cat > README.md << 'EOF'
 ## Cara Install di Termux
 
 ```bash
-pkg update && pkg upgrade
-pkg install git
-pkg install nodejs
-git clone https://github.com/zdeCodeR/tools-V1.git
-cd tools-V1
-npm install
-npm start
+1. pkg update && pkg upgrade
+
+2. pkg install git
+
+3. pkg install nodejs
+
+3. git clone                                                  https://github.com/zdeCodeR/tools-V1.git
+
+4. cd tools-V1
+
+5. cat > package.json << 'EOF'
+   {
+    "name": "my-whatsapp-bot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+    "start": "node index.js"
+     },
+    "dependencies": {
+    "@whiskeysockets/baileys": "^6.5.0",
+    "pino": "^9.0.0"
+  }
+}
+EOF
+
+6. npm install
+7. npm start
